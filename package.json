@@ -1,0 +1,13 @@
+{
+  "name": "spademo",
+  "version": "1.0.0",
+  "description": "demp SPA app for micronaut and react",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-modal": "^3.14.4",
+    "react-router-dom": "^6.3.0"
+  }
+}

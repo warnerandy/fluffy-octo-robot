@@ -1,0 +1,72 @@
+buildscript {
+  repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+        mavenLocal()
+        mavenCentral()
+    }
+  }
+  dependencies {
+    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:${assetPipelineVersion}"
+    classpath "com.bertramlabs.plugins:less-asset-pipeline:${assetPipelineVersion}"
+    classpath "com.bertramlabs.plugins:jsx-asset-pipeline:${assetPipelineVersion}"
+  }
+}
+
+
+plugins {
+    id("groovy") 
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.3.0"
+}
+
+version = "0.1"
+group = "com.example"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+
+
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    compileOnly("io.micronaut:micronaut-http-validation")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
+
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.1.4'
+
+    implementation("io.micronaut.rxjava2:micronaut-rxjava2")
+    implementation("io.micronaut.rxjava2:micronaut-rxjava2-http-client")
+    
+    implementation "com.bertramlabs.plugins:asset-pipeline-micronaut:${assetPipelineVersion}"
+    implementation "com.bertramlabs.plugins:jsx-asset-pipeline:${assetPipelineVersion}"
+    implementation "com.bertramlabs.plugins:less-asset-pipeline:${assetPipelineVersion}"
+
+}
+
+
+
+application {
+    mainClass.set("com.example.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
+    }
+}
